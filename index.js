@@ -19,7 +19,7 @@ module.exports = function (opts) {
 
   return through.obj(function (file, enc, cb) {
 
-    var filePath = path.extname(file.path).toLowerCase().substr(1);
+    var fileExt = path.extname(file.path).toLowerCase().substr(1);
 
     if (file.isNull()) {
       cb(null, file);
@@ -31,7 +31,7 @@ module.exports = function (opts) {
       return;
     }
 
-    if (validExts.indexOf(filePath) === -1) {
+    if (validExts.indexOf(fileExt) === -1) {
       if (opts.verbose) {
         gutil.log('gulp-pretty-data: Skipping unsupported file ' + chalk.blue(file.relative));
       }
@@ -41,7 +41,7 @@ module.exports = function (opts) {
     }
 
     try {
-      file.contents = new Buffer(pd[filePath+methodSuffix](String(file.contents), opts.preserveComments));
+      file.contents = new Buffer(pd[fileExt+methodSuffix](String(file.contents), opts.preserveComments));
     } catch (err) {
       return cb(new gutil.PluginError('gulp-pretty-data', err, opts));
     }
