@@ -12,13 +12,13 @@ var gulp = require('gulp');
 var prettyData = require('gulp-pretty-data');
 
 gulp.task('minify', function() {
-  gulp.src('src/*.{xml,json}')
+  gulp.src('src/**.{xml,json}')
     .pipe(prettyData({type: 'minify', preserveComments: true}))
     .pipe(gulp.dest('dist'))
 });
 
 gulp.task('prettify', function() {
-  gulp.src('src/*.{xml,json}')
+  gulp.src('src/**.{xml,json}')
     .pipe(prettyData({type: 'prettify'}))
     .pipe(gulp.dest('dist'))
 });
