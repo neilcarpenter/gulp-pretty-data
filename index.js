@@ -11,7 +11,7 @@ module.exports = function (opts) {
     throw new gutil.PluginError('gulp-pretty-data', 'Please specify a "type" of "minify" or "prettify"');
   }
 
-  opts.preserveComments = opts.preserveComments ? opts.preserveComments : false;
+  opts.preserveComments = opts.hasOwnProperty('preserveComments') ? opts.preserveComments : false;
   opts.verbose = process.argv.indexOf('--verbose') !== -1;
 
   var validExts    = ['xml', 'json', 'css', 'sql'];

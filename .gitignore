@@ -13,6 +13,8 @@ pids
 logs
 results
 
+examples/build
+
 npm-debug.log
 node_modules
 *.sublime*
