@@ -4,6 +4,7 @@ var pd      = require('pretty-data').pd;
 var gutil   = require('gulp-util');
 var path    = require('path');
 var through = require('through2');
+var chalk   = require('chalk');
 
 module.exports = function (opts) {
 
