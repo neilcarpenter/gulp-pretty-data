@@ -8,12 +8,19 @@ Install the module with: `npm install gulp-pretty-data --save-dev`
 ## Usage
 
 ```js
-var gulp = require('gulp');
+var gulp       = require('gulp');
 var prettyData = require('gulp-pretty-data');
 
 gulp.task('minify', function() {
-  gulp.src('src/**.{xml,json}')
-    .pipe(prettyData({type: 'minify', preserveComments: true}))
+  gulp.src('src/**.{xml,json,xlf,svg}')
+    .pipe(prettyData({
+      type: 'minify',
+      preserveComments: true,
+      extensions: {
+        'xlf': 'xml',
+        'svg': 'xml'
+      }
+    }))
     .pipe(gulp.dest('dist'))
 });
 

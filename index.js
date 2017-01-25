@@ -12,6 +12,7 @@ module.exports = function (opts) {
   }
 
   opts.preserveComments = opts.hasOwnProperty('preserveComments') ? opts.preserveComments : false;
+  opts.extensions = opts.hasOwnProperty('extensions') ? opts.extensions : {};
   opts.verbose = process.argv.indexOf('--verbose') !== -1;
 
   var validExts    = ['xml', 'json', 'css', 'sql'];
@@ -20,6 +21,7 @@ module.exports = function (opts) {
   return through.obj(function (file, enc, cb) {
 
     var fileExt = path.extname(file.path).toLowerCase().substr(1);
+    fileExt = fileExt in opts.extensions ? opts.extensions[fileExt] : fileExt;
 
     if (file.isNull()) {
       cb(null, file);
