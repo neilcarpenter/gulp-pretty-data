@@ -1,14 +1,15 @@
 'use strict';
 
-var pd      = require('pretty-data').pd;
-var gutil   = require('gulp-util');
-var path    = require('path');
-var through = require('through2');
+var pd          = require('pretty-data').pd;
+var log         = require('fancy-log');
+var path        = require('path');
+var through     = require('through2');
+var PluginError = require('plugin-error');
 
 module.exports = function (opts) {
 
   if (!opts || !opts.type || (opts.type !== 'minify' && opts.type !== 'prettify')) {
-    throw new gutil.PluginError('gulp-pretty-data', 'Please specify a "type" of "minify" or "prettify"');
+    throw new PluginError('gulp-pretty-data', 'Please specify a "type" of "minify" or "prettify"');
   }
 
   opts.preserveComments = opts.hasOwnProperty('preserveComments') ? opts.preserveComments : false;
@@ -29,13 +30,13 @@ module.exports = function (opts) {
     }
 
     if (file.isStream()) {
-      cb(new gutil.PluginError('gulp-pretty-data', 'Streaming not supported'));
+      cb(new PluginError('gulp-pretty-data', 'Streaming not supported'));
       return;
     }
 
     if (validExts.indexOf(fileExt) === -1) {
       if (opts.verbose) {
-        gutil.log('gulp-pretty-data: Skipping unsupported file ' + chalk.blue(file.relative));
+        log('gulp-pretty-data: Skipping unsupported file ' + chalk.blue(file.relative));
       }
 
       cb(null, file);
@@ -45,7 +46,7 @@ module.exports = function (opts) {
     try {
       file.contents = new Buffer(pd[fileExt+methodSuffix](String(file.contents), opts.preserveComments));
     } catch (err) {
-      return cb(new gutil.PluginError('gulp-pretty-data', err, opts));
+      return cb(new PluginError('gulp-pretty-data', err, opts));
     }
     cb(null, file);
 
