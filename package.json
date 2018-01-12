@@ -1,7 +1,7 @@
 {
   "name": "gulp-pretty-data",
   "description": "Gulp plugin to minify or prettify xml, json, css, sql",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
   "homepage": "https://github.com/neilcarpenter/gulp-pretty-data",
   "author": {
