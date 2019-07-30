@@ -1,5 +1,6 @@
 'use strict';
 
+var chalk       = require('chalk');
 var pd          = require('pretty-data').pd;
 var log         = require('fancy-log');
 var path        = require('path');
